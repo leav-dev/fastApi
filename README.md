@@ -153,6 +153,166 @@ Asegúrate de que todas las dependencias estén instaladas ejecutando:
 pip install -r complements/requirements.txt
 ```
 
+# 🪟 Documentación para Windows
+
+Esta sección describe los pasos y consideraciones específicas para ejecutar el proyecto en **Windows 10/11**, tanto **con Docker** como **sin Docker**.
+
+---
+
+## ✅ Requisitos en Windows
+
+### Para ejecución sin Docker
+- Windows 10 o Windows 11
+- Python **3.8 o superior** (descargado desde https://www.python.org)
+- pip (incluido con Python)
+- PowerShell o CMD
+
+⚠️ Durante la instalación de Python, **asegúrate de marcar**:
+- ✅ *Add Python to PATH*
+
+---
+
+### Para ejecución con Docker
+- Docker Desktop for Windows
+- WSL 2 habilitado (recomendado por Docker)
+
+📌 Docker Desktop descarga automáticamente WSL 2 si no está instalado.
+
+---
+
+## 🚀 Ejecución en Windows SIN Docker
+
+### 1. Clonar el repositorio
+```powershell
+git clone https://github.com/leav-dev/fastApi
+cd fastApi
+```
+
+### 2. Crear entorno virtual
+```powershell
+python -m venv .venv
+```
+
+### 3. Activar entorno virtual
+
+#### PowerShell:
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+Si aparece un error de ejecución de scripts, ejecutar **una sola vez**:
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+#### CMD:
+```cmd
+.venv\Scripts\activate
+```
+
+### 4. Instalar dependencias
+```powershell
+pip install -r complements\requirements.txt
+```
+
+### 5. Ejecutar el servidor FastAPI
+```powershell
+cd main
+uvicorn core.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+📍 Disponible en:
+http://localhost:8000
+
+### 6. Desactivar entorno virtual
+```powershell
+deactivate
+```
+
+---
+
+## 🐳 Ejecución en Windows CON Docker
+
+### 1. Verificar Docker
+```powershell
+docker --version
+docker compose version
+```
+
+### 2. Clonar el repositorio
+```powershell
+git clone https://github.com/leav-dev/fastApi
+cd fastApi
+```
+
+### 3. Construir y ejecutar contenedores
+```powershell
+docker-compose up --build
+```
+
+O en segundo plano:
+```powershell
+docker-compose up -d --build
+```
+
+📍 Aplicación disponible en:
+http://localhost:3000
+
+### 4. Ver logs
+```powershell
+docker-compose logs -f proyecto_fast_api
+```
+
+### 5. Detener contenedores
+```powershell
+docker-compose down
+```
+
+---
+
+## 📂 Consideraciones importantes en Windows
+
+### 🔹 Volúmenes y Hot Reload
+- Docker Desktop usa **WSL 2**
+- Los cambios en el código se reflejan automáticamente
+- No es necesario reconstruir la imagen para cambios de código
+
+### 🔹 Problemas comunes
+
+#### ❌ Error: permission denied
+- Ejecuta Docker Desktop como administrador
+- Asegúrate de que el proyecto esté dentro de tu carpeta de usuario
+
+#### ❌ Puerto ocupado
+```powershell
+netstat -ano | findstr :3000
+```
+
+#### ❌ Scripts bloqueados (PowerShell)
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+---
+
+## 🧠 Recomendaciones
+
+- Usar **PowerShell**
+- Mantener el proyecto en rutas sin espacios
+- Usar Docker Desktop con **WSL 2**
+- Evitar rutas de red
+
+---
+
+## ✅ Compatibilidad verificada
+
+| Entorno | Estado |
+|------|------|
+| Windows 10 + Python | ✅ |
+| Windows 11 + Python | ✅ |
+| Docker Desktop + WSL2 | ✅ |
+| PowerShell | ✅ |
+
 ## 📝 Notas Adicionales
 
 - El proyecto utiliza FastAPI con Uvicorn como servidor ASGI
