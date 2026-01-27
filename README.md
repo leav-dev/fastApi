@@ -18,8 +18,8 @@ Este proyecto es una aplicación web desarrollada con FastAPI que puede ejecutar
 
 #### 1. Clonar el repositorio
 ```bash
-git clone <url-del-repositorio>
-cd <nombre-del-proyecto>
+git clone https://github.com/leav-dev/fastApi
+cd fastApi
 ```
 
 #### 2. Crear entorno virtual
