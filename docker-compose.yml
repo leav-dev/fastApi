@@ -7,6 +7,5 @@ services:
     volumes:
       - ./main:/data/code/
     ports:
-      - "3000:1998"
-    # command: /bin/bash -c "source entornoVirtual/bin/activate && cd code/ && ls && uvicorn main.core.main:app --reload"
+      - "1998:1998"
     command: /bin/bash -c "source entornoVirtual/bin/activate && cd code/ && ls && uvicorn core.main:app --reload --host 0.0.0.0 --port 1998"
