@@ -51,16 +51,17 @@ async def openWeatherGeo(city: str):
     lat = geo_data[0]["lat"]
     lon = geo_data[0]["lon"]
 
-#   return {
-#     "city": city,
-#     "lon": geo_data[0]["lon"],
-#     "lat": geo_data[0]["lat"],
-#     # "geo_data": geo_data[0]
-#   }
+  return await OpenWeather(city, lat, lon)
+  # return {
+  #   "city": city,
+  #   "lon": geo_data[0]["lon"],
+  #   "lat": geo_data[0]["lat"],
+  #   # "geo_data": geo_data[0]
+  # }
 
-# @app.get("open/wheater/{city}/{lat}/{lon}")
-# async def OpenWeather(city: str, lat:str, lon:str):
-#   async with httpx.AsyncClient() as client:
+@app.get("open/wheater/{city}/{lat}/{lon}")
+async def OpenWeather(city: str, lat:str, lon:str):
+  async with httpx.AsyncClient() as client:
     weather_response = await client.get(
       WEATHER_URL,
       params={"lat": lat, "lon": lon, "appid": OW_API_KEY, "units": "metric", "lang": "es"},
